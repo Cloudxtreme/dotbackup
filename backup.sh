@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+#	CONFIG
+#
+
 # Define the dot-files and dot-directories to backup (omit the '.').
 # This is relative to home (~/).
 backup_dots=(zshrc zprofile zlogin zlogout zsh vimrc vim)
@@ -7,6 +11,12 @@ backup_dots=(zshrc zprofile zlogin zlogout zsh vimrc vim)
 # Define the stuff you wish to exclude, either the file, directory 
 # or wildcard files. (removes file from backup.)
 backup_exclude=(zsh/zsh_history vim/backup/* vim/tmp/*)
+
+#
+#	/CONFIG
+#
+
+
 
 # This variable defines the directory to store this host's backup.
 hostdir=$HOSTNAME
@@ -33,8 +43,10 @@ esac
 for b in ${backup_dots[@]} ; do
 	if [ -e ~/.$b ] ; then
 		if [ -d ~/.$b ] ; then
+			mkdir -p $(dirname ./$hostdir/$b)
 			$($dircpcmd ~/.$b ./$hostdir/$b)
 		elif [ -f ~/.$b ] ; then
+			mkdir -p $(dirname ./$hostdir/$b)
 			cat ~/.$b > ./$hostdir/$b
 		else
 			echo "Error backing up .$b"
