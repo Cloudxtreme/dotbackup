@@ -50,6 +50,9 @@ for b in ${backup_dots[@]} ; do
 	if [ -e ~/.$b ] ; then
 		if [ -d ~/.$b ] ; then
 			mkdir -p $(dirname ./$hostdir/$b)
+			if [ -d ./$hostdir/$b ] ; then
+				rm -r ./$hostdir/$b
+			fi
 			$($dircpcmd ~/.$b ./$hostdir/$b)
 			let "cb++"
 		elif [ -f ~/.$b ] ; then
@@ -100,3 +103,4 @@ fi
 
 echo ""
 echo "Done!"
+echo ""
