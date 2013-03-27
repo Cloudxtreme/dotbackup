@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# If this is a git repo, pull from remote
+if [ -d "./.git" ] ; then
+	echo "Getting the most recent updates from remote git repo ... "
+	git pull
+	echo "Done!"
+	echo ""
+fi
+
 # Define where the backup file is, either hostname or argument
 if [ ! $1 ] ; then
 	hostdir=$HOSTNAME

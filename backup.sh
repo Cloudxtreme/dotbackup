@@ -12,6 +12,10 @@ backup_dots=(zshrc zprofile zlogin zlogout zsh vimrc vim)
 # or wildcard files. (removes file from backup.)
 backup_exclude=(zsh/zsh_history vim/backup/* vim/tmp/*)
 
+# Should we back up to a git repository? (This just does a basic 
+# add, commit, push).
+git_backup=true
+
 #
 #	/CONFIG
 #
@@ -100,3 +104,14 @@ fi
 
 echo ""
 echo "Done!"
+echo ""
+
+# Backing up to git if requested in config.
+if [ -d "./.git" ] && $git_backup ; then
+	dtn=$(date + "%Y-%m-%d")
+	echo "Backing up to remote git repository ..."
+	git add .
+	git commit -m "Backup of $hostdir; ($dtn)"
+	git push --all
+	echo "Done!"
+fi
