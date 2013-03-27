@@ -34,6 +34,9 @@ if [ -e ./$hostdir/ ] ; then
 	for i in $(ls ./$hostdir/) ; do
 		if [ -e ./$hostdir/$i ] ; then
 			if [ -d ./$hostdir/$i ] ; then
+				if [ -d ~/.$i ] ; then
+					rm -r ~/.$i
+				fi
 				$($dircpcmd ./$hostdir/$i ~/.$i)
 			elif [ -f ./$hostdir/$i ] ; then
 				cat ./$hostdir/$i > ~/.$i
