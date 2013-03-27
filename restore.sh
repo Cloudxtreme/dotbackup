@@ -22,6 +22,7 @@ esac
 
 # Check backups exist and if so restore them.
 if [ -e ./$hostdir/ ] ; then
+e	echo "Restoring $hostdir ... "
 	for i in $(ls ./$hostdir/) ; do
 		if [ -e ./$hostdir/$i ] ; then
 			if [ -d ./$hostdir/$i ] ; then
@@ -34,5 +35,8 @@ if [ -e ./$hostdir/ ] ; then
 		fi
 	done
 else
-	echo "No backup available for $hostdir"
+	echo "No backup available for $hostdir!"
 fi
+
+echo ""
+echo "Done!"
