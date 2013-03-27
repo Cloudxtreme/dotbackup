@@ -30,7 +30,7 @@ esac
 
 # Check backups exist and if so restore them.
 if [ -e ./$hostdir/ ] ; then
-e	echo "Restoring $hostdir ... "
+	echo "Restoring $hostdir ... "
 	for i in $(ls ./$hostdir/) ; do
 		if [ -e ./$hostdir/$i ] ; then
 			if [ -d ./$hostdir/$i ] ; then
