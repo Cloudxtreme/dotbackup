@@ -108,7 +108,7 @@ echo ""
 
 # Backing up to git if requested in config.
 if [ -d "./.git" ] && $git_backup ; then
-	dtn=$(date + "%Y-%m-%d")
+	dtn=$(date +"%Y-%m-%d")
 	echo "Backing up to remote git repository ..."
 	git add .
 	git commit -m "Backup of $hostdir; ($dtn)"
