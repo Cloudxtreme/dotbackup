@@ -10,7 +10,7 @@ backup_dots=(zshrc zprofile zlogin zlogout zsh vimrc vim)
 
 # Define the stuff you wish to exclude, either the file, directory 
 # or wildcard files. (removes file from backup.)
-backup_exclude=(zsh/zsh_history vim/backup/* vim/tmp/*)
+backup_exclude=(zsh/zsh_history vim/backup/* vim/backup/.* vim/tmp/* vim/tmp/.*)
 
 # Should we back up to a git repository? (This just does a basic 
 # add, commit, push).
@@ -85,7 +85,7 @@ fe=0
 echo "Excluding files from backup ..."
 for e in ${backup_exclude[@]} ; do
 	if [ $(ls ./$hostdir/$e 2> /dev/null | wc -l) -gt 1 ] ; then
-		rm -r ./$hostdir/$e
+		rm -r ./$hostdir/$e 2> /dev/null
 		let "ce++"
 	else	
 		if [ -d ./$hostdir/$e ] ; then
