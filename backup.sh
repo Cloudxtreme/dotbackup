@@ -12,6 +12,10 @@ backup_dots=(zshrc zprofile zlogin zlogout zsh vimrc vim)
 # or wildcard files. (removes file from backup.)
 backup_exclude=(zsh/zsh_history vim/backup/* vim/backup/.* vim/tmp/* vim/tmp/.*)
 
+# Empty directories (omit the '.')
+# Create the following directories when restoring
+backup_empty=(vim/backup/ vim/tmp/)
+
 # Should we back up to a git repository? (This just does a basic 
 # add, commit, push).
 git_backup=true
@@ -104,6 +108,20 @@ echo "$ce items excluded from backup."
 if [ $fe -gt 1 ] ; then
 	echo "$fe items not found in this backup."
 fi
+
+# Count variables
+cg=0
+
+# Create empty directories.
+echo "Creating empty directories ..."
+for g in ${backup_empty[@]} ; do
+	mkdir -p ./$hostdir/$g
+	echo 'Empty Folder' > ./$hostdir/$g/EMPTY
+	let "cg++"
+done
+
+echo "$cg empty directories created."
+
 
 echo ""
 echo "Done!"
